@@ -1,13 +1,13 @@
 // what messages need to be passed?
 
-// a guessed letter gets sent and checked
-// either yes or no
-// a guessed word, gets sent and checked, eithe ryes or no.
-// number of guesses decreases by one with each guess
-// game beginning/ending functionality to be encapsulated in Board
-// so I guess Board should check the guesses?
+// life counter,
+// congratulations when you finish,
+// show incorrect letters below,
+// display hints
+// begin game button
+// create new game using input string
 
-// need functionality to be able to create new games..... put this in HangmanController
+// extra: make it multiplayer
 
 
 var phrase1 = new Game("rhythm", ["think music", "feel it"]);
@@ -31,6 +31,7 @@ function HangmanController(gamesArray) {
 
 	var phraseDisplay = document.getElementsByClassName("phrase-display")[0];
 	var guessLetterInput = document.getElementsByClassName("guess-letter")[0];
+	var beginGameBtn = document.getElementsByClassName("begin-game-btn")[0];
 
 	guessLetterInput.addEventListener("keyup", function(event) {
 		if (event.keyCode === 13) {
@@ -38,12 +39,12 @@ function HangmanController(gamesArray) {
 			event.target.value = "";
 		}
 	});
+	beginGameBtn.addEventListener("click", startRandGame);
 
 	var solvedIndices = [];
 	var curPhrase = "";
 	var curHints = [];
 	var curGameIndex = 0;
-	initializeGame(curGameIndex);
 
 	function initializeGame(gameIndex) {
 		curGameIndex = gameIndex;
@@ -68,37 +69,33 @@ function HangmanController(gamesArray) {
 	}
 
 	function displayPhrase() {
-		console.log(curPhrase);
 		phraseDisplay.innerHTML = "";
 
 		for (var k = 0; k < curPhrase.length; k++) {
 	
 			var letterDiv = document.createElement("DIV");
-			
+
 			if (curPhrase[k] === " ") {
 				letterDiv.classList.add("phrase-display__space");
 			} else {
 				letterDiv.classList.add("phrase-display__letter");
 			}
 			if (solvedIndices.indexOf(k) > -1) {
-				var letter = document.createTextNode(curPhrase[k]);
+				letterDiv.innerHTML = curPhrase[k];
 				letterDiv.classList.add("phrase-display__letter--solved");
-				letterDiv.appendChild(letter);
 			}
-			phraseDisplay.appendChild(letterDiv);
 
+			phraseDisplay.appendChild(letterDiv);
 		}
 	}
 
 	function checkLetter(letter) {
 
 		for (var k = 0; k < curPhrase.length; k++) {
-			console.log('test', letter, curPhrase[k]);
 			if (letter.toUpperCase() === curPhrase[k]) {
 				solvedIndices.push(k);
 			}
 		}
-		console.log(solvedIndices);
 		displayPhrase();
 	}
 }
