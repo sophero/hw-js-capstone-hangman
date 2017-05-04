@@ -7,25 +7,55 @@
 // game beginning/ending functionality to be encapsulated in Board
 // so I guess Board should check the guesses?
 
-// need functionality to be able to create new games.....
+// need functionality to be able to create new games..... put this in HangmanController
 
-var board = new Board();
 
 var phrase1 = new Game("rhythm", ["think music", "feel it"]);
 var phrase2 = new Game("borborygmus", ["digestion related", "somewhat onomatopoeic"]);
+
+var gamesArray = [phrase1, phrase2];
+
+var hangman = new HangmanController(gamesArray);
+
 
 function Game(phraseStr, hintArray) {
 	this.phrase = phraseStr.toUpperCase();
 	this.hints = hintArray;
 
-
-
 }
 
-function Board() {
+function HangmanController(gamesArray) {
+
+	this.startRandGame = startRandGame;
+
+	var gamesArray = gamesArray;
 
 	var phraseDisplay = document.getElementsByClassName("phrase-display")[0];
 	var guessLetterInput = document.getElementsByClassName("guess-letter")[0];
 
-	guessLetterInput.focus();
+	var curGame;
+	var curPhrase = "";
+	var curHints = [];
+
+
+	function initializeGame(gameIndex) {
+		curGame = gamesArray[gameIndex];
+		curPhrase = curGame.phrase;
+		curHints = curGame.hints;
+
+		displayPhrase(curPhrase);
+
+		guessLetterInput.focus();
+
+	}
+
+	function startRandGame() {
+		var randInt = Math.floor(Math.random() * gamesArray.length);
+		initializeGame(randInt);
+	}
+
+	function displayPhrase(phrase) {
+		console.log(phrase);
+	}
+
 }
