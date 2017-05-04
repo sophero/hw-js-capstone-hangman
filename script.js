@@ -12,7 +12,6 @@
 
 var phrase1 = new Game("rhythm", ["think music", "feel it"]);
 var phrase2 = new Game("borborygmus", ["digestion related", "somewhat onomatopoeic"]);
-
 var gamesArray = [phrase1, phrase2];
 
 var hangman = new HangmanController(gamesArray);
@@ -25,7 +24,6 @@ function Game(phraseStr, hintArray) {
 }
 
 function HangmanController(gamesArray) {
-
 	this.startRandGame = startRandGame;
 
 	var gamesArray = gamesArray;
@@ -33,10 +31,11 @@ function HangmanController(gamesArray) {
 	var phraseDisplay = document.getElementsByClassName("phrase-display")[0];
 	var guessLetterInput = document.getElementsByClassName("guess-letter")[0];
 
-	var curGameIndex = 0;
+
+	var solvedIndices = [];
 	var curPhrase = "";
 	var curHints = [];
-
+	var curGameIndex = 0;
 	initializeGame(curGameIndex);
 
 	function initializeGame(gameIndex) {
@@ -62,6 +61,27 @@ function HangmanController(gamesArray) {
 
 	function displayPhrase(phrase) {
 		console.log(phrase);
+
+		for (var k = 0; k < phrase.length; k++) {
+	
+			var letterDiv = document.createElement("DIV");
+			letterDiv.className = "phrase-display__letter";
+
+			if (solvedIndices.indexOf(k) > 0) {
+				var letter = document.createTextNode(phrase[k]);
+				letterDiv.appendChild(letter);
+			}
+
+			phraseDisplay.appendChild(letterDiv);
+
+		}
+
+
+
+
+
+
+
 
 	}
 

@@ -1,3 +1,15 @@
+* {
+  box-sizing: border-box; }
 
+.phrase-display {
+  width: 90vw; }
+
+.phrase-display__letter {
+  width: 50px;
+  height: 70px;
+  display: inline-block;
+  border: 1px solid black;
+  margin: 5px;
+  padding: 5px; }
 
 /*# sourceMappingURL=styles.css.map */
