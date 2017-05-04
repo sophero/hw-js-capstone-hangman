@@ -2,7 +2,7 @@
   box-sizing: border-box; }
 
 body {
-  font-family: Helvetica; }
+  font-family: Arial; }
 
 .phrase-display {
   width: 90vw;
@@ -29,5 +29,11 @@ body {
   padding: 5px; }
   .begin-game-btn:hover {
     cursor: pointer; }
+
+.congratulations {
+  display: none;
+  color: red;
+  font-size: 2em;
+  font-weight: bold; }
 
 /*# sourceMappingURL=styles.css.map */
