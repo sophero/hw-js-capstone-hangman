@@ -32,6 +32,12 @@ function HangmanController(gamesArray) {
 	var phraseDisplay = document.getElementsByClassName("phrase-display")[0];
 	var guessLetterInput = document.getElementsByClassName("guess-letter")[0];
 
+	guessLetterInput.addEventListener("keyup", function(event) {
+		if (event.keyCode === 13) {
+			checkLetter(event.target.value);
+			event.target.value = "";
+		}
+	});
 
 	var solvedIndices = [];
 	var curPhrase = "";
@@ -61,29 +67,38 @@ function HangmanController(gamesArray) {
 		initializeGame(randInt);
 	}
 
-	function displayPhrase(phrase) {
-		console.log(phrase);
+	function displayPhrase() {
+		console.log(curPhrase);
 		phraseDisplay.innerHTML = "";
 
-		for (var k = 0; k < phrase.length; k++) {
+		for (var k = 0; k < curPhrase.length; k++) {
 	
 			var letterDiv = document.createElement("DIV");
 			
-			if (phrase[k] === " ") {
-				letterDiv.className = "phrase-display__space";
-
-			} else if (solvedIndices.indexOf(k) > 0) {
-				var letter = document.createTextNode(phrase[k]);
+			if (curPhrase[k] === " ") {
+				letterDiv.classList.add("phrase-display__space");
+			} else {
+				letterDiv.classList.add("phrase-display__letter");
+			}
+			if (solvedIndices.indexOf(k) > -1) {
+				var letter = document.createTextNode(curPhrase[k]);
 				letterDiv.classList.add("phrase-display__letter--solved");
 				letterDiv.appendChild(letter);
-			} else {
-				letterDiv.className = "phrase-display__letter";
 			}
-
 			phraseDisplay.appendChild(letterDiv);
 
 		}
-
 	}
 
+	function checkLetter(letter) {
+
+		for (var k = 0; k < curPhrase.length; k++) {
+			console.log('test', letter, curPhrase[k]);
+			if (letter.toUpperCase() === curPhrase[k]) {
+				solvedIndices.push(k);
+			}
+		}
+		console.log(solvedIndices);
+		displayPhrase();
+	}
 }
