@@ -33,13 +33,16 @@ function HangmanController(gamesArray) {
 	var phraseDisplay = document.getElementsByClassName("phrase-display")[0];
 	var guessLetterInput = document.getElementsByClassName("guess-letter")[0];
 
-	var curGame;
+	var curGameIndex = 0;
 	var curPhrase = "";
 	var curHints = [];
 
+	initializeGame(curGameIndex);
 
 	function initializeGame(gameIndex) {
-		curGame = gamesArray[gameIndex];
+		curGameIndex = gameIndex;
+
+		var curGame = gamesArray[gameIndex];
 		curPhrase = curGame.phrase;
 		curHints = curGame.hints;
 
@@ -50,12 +53,16 @@ function HangmanController(gamesArray) {
 	}
 
 	function startRandGame() {
-		var randInt = Math.floor(Math.random() * gamesArray.length);
+		do {
+			var randInt = Math.floor(Math.random() * gamesArray.length);		
+		} 
+		while (randInt === curGameIndex);
 		initializeGame(randInt);
 	}
 
 	function displayPhrase(phrase) {
 		console.log(phrase);
+
 	}
 
 }
