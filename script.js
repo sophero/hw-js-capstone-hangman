@@ -12,7 +12,8 @@
 
 var phrase1 = new Game("rhythm", ["think music", "feel it"]);
 var phrase2 = new Game("borborygmus", ["digestion related", "somewhat onomatopoeic"]);
-var gamesArray = [phrase1, phrase2];
+var phrase3 = new Game("system of a down", ["band from Glendale, CA", "members are all of armenian descent"]);
+var gamesArray = [phrase1, phrase2, phrase3]; 
 
 var hangman = new HangmanController(gamesArray);
 
@@ -45,6 +46,7 @@ function HangmanController(gamesArray) {
 		curPhrase = curGame.phrase;
 		curHints = curGame.hints;
 
+		var solvedIndices = [];
 		displayPhrase(curPhrase);
 
 		guessLetterInput.focus();
@@ -61,27 +63,26 @@ function HangmanController(gamesArray) {
 
 	function displayPhrase(phrase) {
 		console.log(phrase);
+		phraseDisplay.innerHTML = "";
 
 		for (var k = 0; k < phrase.length; k++) {
 	
 			var letterDiv = document.createElement("DIV");
-			letterDiv.className = "phrase-display__letter";
+			
+			if (phrase[k] === " ") {
+				letterDiv.className = "phrase-display__space";
 
-			if (solvedIndices.indexOf(k) > 0) {
+			} else if (solvedIndices.indexOf(k) > 0) {
 				var letter = document.createTextNode(phrase[k]);
+				letterDiv.classList.add("phrase-display__letter--solved");
 				letterDiv.appendChild(letter);
+			} else {
+				letterDiv.className = "phrase-display__letter";
 			}
 
 			phraseDisplay.appendChild(letterDiv);
 
 		}
-
-
-
-
-
-
-
 
 	}
 
