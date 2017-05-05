@@ -14,7 +14,7 @@
 
 var phrase1 = new Game("rhythm", ["think music", "some people have it"]);
 var phrase2 = new Game("borborygmus", ["digestion related", "somewhat onomatopoeic"]);
-var phrase3 = new Game("system of a down", ["band from Glendale, CA", "members are all of armenian descent"]);
+var phrase3 = new Game("system of a down", ["band from Glendale, CA", "all members are of armenian descent"]);
 var phrase4 = new Game("meteorologist");
 var gamesArray = [phrase1, phrase2, phrase3, phrase4]; 
 
@@ -45,6 +45,7 @@ function HangmanController(gamesArray) {
 	var incorrectLettersDisplay = document.getElementsByClassName("incorrect-letters__display")[0];
 	var hintsToggleBtn = document.getElementsByClassName("hints__toggle-btn")[0];
 	var hintsCycleBtn = document.getElementsByClassName("hints__cycle-btn")[0];
+	var hintsContainer = document.getElementsByClassName("hints")[0];
 	var hintsDisplay = document.getElementsByClassName("hints__display")[0];
 
 	guessLetterInput.addEventListener("keyup", function(event) {
@@ -89,14 +90,13 @@ function HangmanController(gamesArray) {
 		hideHints();
 		if (curHints.length === 0) {
 			hintsToggleBtn.innerHTML = "Sorry, no hints available."	
-			hintsToggleBtn.classList.remove("hints__toggle-btn");
 			hintsToggleBtn.classList.add("hints__toggle-btn--inactive");
 		} else {
 			hintsToggleBtn.innerHTML = "Show hints";	
 			hintsToggleBtn.classList.remove("hints__toggle-btn--inactive");
-			hintsToggleBtn.classList.add("hints__toggle-btn");
 		}
 		congratsMsg.style.display = "none";
+		hintsContainer.style.display = "block";
 		guessInterface.style.display = "block";
 		phraseDisplayContainer.style.display = "block";
 		incorrectLettersDisplay.innerHTML = "";
@@ -189,6 +189,9 @@ function HangmanController(gamesArray) {
 	}
 
 	function toggleHints() {
+		if (curHints.length === 0) {
+			return;
+		}
 		if (hintsDisplay.style.display === "block") {
 			hideHints();
 		} else {
