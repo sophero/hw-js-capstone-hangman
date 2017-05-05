@@ -1,16 +1,25 @@
 .phrase-display {
-	width: 90vw;
+	width: 90%;
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
 }
 
+.phrase-display__container {
+	display: none;
+	width: 90vw;
+	margin: 10px auto;
+	padding: 40px;
+	border: 2px solid black;
+	border-radius: 10px;
+}
+
 .phrase-display__letter {
-	width: 50px;
-	height: 70px;
+	width: 60px;
+	height: 80px;
 	border: 1px solid black;
-	margin: 5px;
-	padding: 5px;
+	margin: 2px;
+	padding: 7px;
 }
 
 .phrase-display__leter--solved {
@@ -18,5 +27,8 @@
 }
 
 .phrase-display__space {
-
+	width: 50px;
+	height: 70px;
+	margin: 5px;
+	padding: 5px;
 }

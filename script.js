@@ -1,5 +1,7 @@
 // what messages need to be passed?
 
+// Make it so that words don't split over multiple lines.
+// Phrase consists of: x words
 // life counter,
 // guess phrase input
 // congratulations when you finish,
@@ -29,6 +31,7 @@ function HangmanController(gamesArray) {
 
 	var gamesArray = gamesArray;
 
+	var phraseDisplayContainer = document.getElementsByClassName("phrase-display__container")[0];
 	var phraseDisplay = document.getElementsByClassName("phrase-display")[0];
 	var guessInterface = document.getElementsByClassName("guess")[0];
 	var guessLetterInput = document.getElementsByClassName("guess-letter__input")[0];
@@ -70,6 +73,7 @@ function HangmanController(gamesArray) {
 
 		congratsMsg.style.display = "none";
 		guessInterface.style.display = "block";
+		phraseDisplayContainer.style.display = "block";
 		parsePhrase(curPhrase);
 		displayPhrase();
 
