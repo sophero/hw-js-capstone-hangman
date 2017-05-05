@@ -1,7 +1,6 @@
 // what messages need to be passed?
 
 // Make it so that words don't split over multiple lines.
-// Phrase consists of: x words
 // life counter,
 // guess phrase input
 // congratulations when you finish,
@@ -37,6 +36,7 @@ function HangmanController(gamesArray) {
 	var guessLetterInput = document.getElementsByClassName("guess-letter__input")[0];
 	var beginGameBtn = document.getElementsByClassName("begin-game-btn")[0];
 	var congratsMsg = document.getElementsByClassName("congratulations")[0];
+	var numSpacesMsg = document.getElementsByClassName("guess__num-spaces-msg")[0];
 
 	guessLetterInput.addEventListener("keyup", function(event) {
 		if (event.keyCode === 13) {
@@ -74,18 +74,26 @@ function HangmanController(gamesArray) {
 		congratsMsg.style.display = "none";
 		guessInterface.style.display = "block";
 		phraseDisplayContainer.style.display = "block";
-		parsePhrase(curPhrase);
+		countSpaces(curPhrase);
 		displayPhrase();
 
 		guessLetterInput.focus();
 	}
 
-	function parsePhrase(curPhrase) {
+	function countSpaces(curPhrase) {
 		for (var k = 0; k < curPhrase.length; k++) {
 			if (curPhrase[k] === " ") {
 				spaceIndices.push(k);
 			}
 		}
+		var numWords = 1 + spaceIndices.length;
+		var wordsMsg = "Phrase consists of " + numWords;
+		if (numWords === 1) {
+			wordsMsg += " word.";
+		} else {
+			wordsMsg += " words.";
+		}
+		numSpacesMsg.innerHTML = wordsMsg;
 	}
 
 	function displayPhrase() {
