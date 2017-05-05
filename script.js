@@ -74,6 +74,7 @@ function HangmanController(gamesArray) {
 		congratsMsg.style.display = "none";
 		guessInterface.style.display = "block";
 		phraseDisplayContainer.style.display = "block";
+		incorrectLettersDisplay.innerHTML = "";
 		countSpaces(curPhrase);
 		displayPhrase();
 
