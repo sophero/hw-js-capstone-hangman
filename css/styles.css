@@ -58,4 +58,10 @@ body {
   width: 50px;
   padding: 10px; }
 
+.hints__display {
+  display: none; }
+
+.hints__cycle-btn {
+  display: none; }
+
 /*# sourceMappingURL=styles.css.map */

@@ -8,9 +8,11 @@
 // add some color.
 
 // extra: make it multiplayer
+// incorporate external word libraries using some api
+// add hangman image sequence
 
 
-var phrase1 = new Game("rhythm", ["think music", "feel it"]);
+var phrase1 = new Game("rhythm", ["think music", "some people have it"]);
 var phrase2 = new Game("borborygmus", ["digestion related", "somewhat onomatopoeic"]);
 var phrase3 = new Game("system of a down", ["band from Glendale, CA", "members are all of armenian descent"]);
 var phrase4 = new Game("meteorologist");
@@ -52,9 +54,12 @@ function HangmanController(gamesArray) {
 		}
 	});
 	beginGameBtn.addEventListener("click", startRandGame);
+	hintsToggleBtn.addEventListener("click", toggleHints);
+	hintsCycleBtn.addEventListener("click", cycleHints);
 
 	var curPhrase = "";
 	var curHints = [];
+	var curHintIndex = 0;
 	var curGameIndex = 0;
 	var solvedIndices = [];
 	var spaceIndices = [];
@@ -79,12 +84,16 @@ function HangmanController(gamesArray) {
 		var curGame = gamesArray[gameIndex];
 		curPhrase = curGame.phrase;
 		curHints = curGame.hints;
+		curHintIndex = 0;
 
+		hideHints();
 		if (curHints.length === 0) {
 			hintsToggleBtn.innerHTML = "Sorry, no hints available."	
+			hintsToggleBtn.classList.remove("hints__toggle-btn");
 			hintsToggleBtn.classList.add("hints__toggle-btn--inactive");
 		} else {
-			hintsToggleBtn.innerHTML = "Show hint";	
+			hintsToggleBtn.innerHTML = "Show hints";	
+			hintsToggleBtn.classList.remove("hints__toggle-btn--inactive");
 			hintsToggleBtn.classList.add("hints__toggle-btn");
 		}
 		congratsMsg.style.display = "none";
@@ -180,12 +189,34 @@ function HangmanController(gamesArray) {
 	}
 
 	function toggleHints() {
+		if (hintsDisplay.style.display === "block") {
+			hideHints();
+		} else {
+			showHints();	
+		}
+	}
 
+	function showHints() {
+		hintsDisplay.style.display = "block";
+		hintsCycleBtn.style.display = "block";
+		hintsToggleBtn.innerHTML = "Hide hints";
+		hintsDisplay.innerHTML = curHints[curHintIndex];
+	}
+
+	function hideHints() {
+		hintsDisplay.style.display = "none";
+		hintsCycleBtn.style.display = "none";
+		hintsToggleBtn.innerHTML = "Show hints";
 	}
 
 	function cycleHints() {
-
+		curHintIndex += 1;
+		if (curHintIndex === curHints.length) {
+			curHintIndex = 0;
+		}
+		hintsDisplay.innerHTML = curHints[curHintIndex];
 	}
+
 }
 
 // few things:
