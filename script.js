@@ -30,7 +30,8 @@ function HangmanController(gamesArray) {
 	var gamesArray = gamesArray;
 
 	var phraseDisplay = document.getElementsByClassName("phrase-display")[0];
-	var guessLetterInput = document.getElementsByClassName("guess-letter")[0];
+	var guessInterface = document.getElementsByClassName("guess")[0];
+	var guessLetterInput = document.getElementsByClassName("guess-letter__input")[0];
 	var beginGameBtn = document.getElementsByClassName("begin-game-btn")[0];
 	var congratsMsg = document.getElementsByClassName("congratulations")[0];
 
@@ -49,6 +50,14 @@ function HangmanController(gamesArray) {
 	var spaceIndices = [];
 	var inGame = false;
 
+	function startRandGame() {
+		do {
+			var randInt = Math.floor(Math.random() * gamesArray.length);		
+		} 
+		while (randInt === curGameIndex);
+		initializeGame(randInt);
+	}
+
 	function initializeGame(gameIndex) {
 		curGameIndex = gameIndex;
 		solvedIndices = [];
@@ -60,18 +69,11 @@ function HangmanController(gamesArray) {
 		curHints = curGame.hints;
 
 		congratsMsg.style.display = "none";
+		guessInterface.style.display = "block";
 		parsePhrase(curPhrase);
 		displayPhrase();
 
 		guessLetterInput.focus();
-	}
-
-	function startRandGame() {
-		do {
-			var randInt = Math.floor(Math.random() * gamesArray.length);		
-		} 
-		while (randInt === curGameIndex);
-		initializeGame(randInt);
 	}
 
 	function parsePhrase(curPhrase) {
@@ -124,5 +126,6 @@ function HangmanController(gamesArray) {
 	function solvedGame() {
 		inGame = false;
 		congratsMsg.style.display = "block";
+		guessInterface.style.display = "none";
 	}
 }
