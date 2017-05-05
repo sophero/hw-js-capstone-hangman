@@ -18,7 +18,7 @@
 .phrase-display__letter {
 	width: 60px;
 	height: 80px;
-	border: 2px solid darkblue;
+	border: 2px solid red;
 	margin: 1px;
 	padding: 15px 7px;
 	text-align: center;
@@ -26,9 +26,8 @@
 	font-weight: bold;
 }
 
-.phrase-display__leter--solved {
-	border-color: black;
-	text-decoration: line-through;
+.phrase-display__letter--solved {
+	border-color: darkblue;
 }
 
 .phrase-display__space {
