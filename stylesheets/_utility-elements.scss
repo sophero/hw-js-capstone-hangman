@@ -16,9 +16,11 @@
 
 .congratulations {
 	display: none;
+	text-align: center;
 	color: red;
-	font-size: 2em;
-	font-weight: bold;
+	margin: 20px;
+	font-size: 1.3em;
+	// font-weight: bold;
 }
 
 .guess {
