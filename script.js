@@ -3,9 +3,8 @@
 // Make it so that words don't split over multiple lines.
 // life counter,
 // guess phrase input
-// display hints
 // create new game using input string
-// add some color.
+// add some color, sizing, positioning.
 
 // extra: make it multiplayer
 // incorporate external word libraries using some api
@@ -39,18 +38,24 @@ function HangmanController(gamesArray) {
 	var phraseDisplay = document.getElementsByClassName("phrase-display")[0];
 	var guessInterface = document.getElementsByClassName("guess")[0];
 	var guessLetterInput = document.getElementsByClassName("guess-letter__input")[0];
+	var guessLetterSubmitBtn = document.getElementsByClassName("guess-letter__submit-btn")[0];
 	var beginGameBtn = document.getElementsByClassName("begin-game-btn")[0];
 	var congratsMsg = document.getElementsByClassName("congratulations")[0];
 	var numSpacesMsg = document.getElementsByClassName("guess__num-spaces-msg")[0];
+	var incorrectLettersContainer = document.getElementsByClassName("incorrect-letters__container")[0];
 	var incorrectLettersDisplay = document.getElementsByClassName("incorrect-letters__display")[0];
 	var hintsToggleBtn = document.getElementsByClassName("hints__toggle-btn")[0];
 	var hintsCycleBtn = document.getElementsByClassName("hints__cycle-btn")[0];
 	var hintsContainer = document.getElementsByClassName("hints")[0];
 	var hintsDisplay = document.getElementsByClassName("hints__display")[0];
 
+	guessLetterSubmitBtn.addEventListener("click", function() {
+		checkLetter();
+		guessLetterInput.value = "";
+	});
 	guessLetterInput.addEventListener("keyup", function(event) {
 		if (event.keyCode === 13) {
-			checkLetter(event.target.value);
+			checkLetter();
 			event.target.value = "";
 		}
 	});
@@ -66,6 +71,7 @@ function HangmanController(gamesArray) {
 	var spaceIndices = [];
 	var incorrectLetters = [];
 	var inGame = false;
+	
 
 	function startRandGame() {
 		do {
@@ -76,6 +82,7 @@ function HangmanController(gamesArray) {
 	}
 
 	function initializeGame(gameIndex) {
+		incorrectLettersContainer.style.display = "block";
 		curGameIndex = gameIndex;
 		solvedIndices = [];
 		spaceIndices = [];
@@ -142,7 +149,9 @@ function HangmanController(gamesArray) {
 		}
 	}
 
-	function checkLetter(letter) {
+	function checkLetter() {
+		var letter = guessLetterInput.value;
+
 		if (letter.length === 0) {
 			return;
 		}
@@ -176,10 +185,10 @@ function HangmanController(gamesArray) {
 		inGame = false;
 		congratsMsg.style.display = "block";
 		guessInterface.style.display = "none";
+		hintsContainer.style.display = "none";
 	}
 
 	function displayIncorrectLetters() {
-		console.log(incorrectLetters);
 		incorrectLettersDisplay.innerHTML = "";
 		for (var k = 0; k < incorrectLetters.length; k++) {
 			let div = document.createElement("div");
@@ -221,8 +230,3 @@ function HangmanController(gamesArray) {
 	}
 
 }
-
-// few things:
-
-// sorry, no hints available
-// 

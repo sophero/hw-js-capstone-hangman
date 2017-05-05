@@ -52,9 +52,24 @@ body {
   display: none; }
 
 .guess-letter__input {
-  font-size: 1.2em;
+  font-size: 1.4em;
   width: 50px;
-  padding: 10px; }
+  padding: 5px 10px;
+  text-align: center; }
+
+.incorrect-letters__container {
+  display: none; }
+
+.guess-letter__submit-btn {
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: lightgreen;
+  border: 2px solid lightgreen;
+  border-radius: 5px;
+  padding: 7px; }
+  .guess-letter__submit-btn:hover {
+    cursor: pointer; }
 
 .hints {
   margin: 10px auto;
