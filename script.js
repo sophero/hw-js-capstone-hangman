@@ -5,6 +5,7 @@
 // guess phrase input
 // display hints
 // create new game using input string
+// add some color.
 
 // extra: make it multiplayer
 
@@ -12,14 +13,19 @@
 var phrase1 = new Game("rhythm", ["think music", "feel it"]);
 var phrase2 = new Game("borborygmus", ["digestion related", "somewhat onomatopoeic"]);
 var phrase3 = new Game("system of a down", ["band from Glendale, CA", "members are all of armenian descent"]);
-var gamesArray = [phrase1, phrase2, phrase3]; 
+var phrase4 = new Game("meteorologist");
+var gamesArray = [phrase1, phrase2, phrase3, phrase4]; 
 
 var hangman = new HangmanController(gamesArray);
 
 
 function Game(phraseStr, hintArray) {
 	this.phrase = phraseStr.toUpperCase();
-	this.hints = hintArray;
+	if (hintArray && hintArray.length > 0) {
+		this.hints = hintArray;
+	} else {
+		this.hints = [];
+	}
 }
 
 function HangmanController(gamesArray) {
@@ -35,6 +41,9 @@ function HangmanController(gamesArray) {
 	var congratsMsg = document.getElementsByClassName("congratulations")[0];
 	var numSpacesMsg = document.getElementsByClassName("guess__num-spaces-msg")[0];
 	var incorrectLettersDisplay = document.getElementsByClassName("incorrect-letters__display")[0];
+	var hintsToggleBtn = document.getElementsByClassName("hints__toggle-btn")[0];
+	var hintsCycleBtn = document.getElementsByClassName("hints__cycle-btn")[0];
+	var hintsDisplay = document.getElementsByClassName("hints__display")[0];
 
 	guessLetterInput.addEventListener("keyup", function(event) {
 		if (event.keyCode === 13) {
@@ -71,10 +80,18 @@ function HangmanController(gamesArray) {
 		curPhrase = curGame.phrase;
 		curHints = curGame.hints;
 
+		if (curHints.length === 0) {
+			hintsToggleBtn.innerHTML = "Sorry, no hints available."	
+			hintsToggleBtn.classList.add("hints__toggle-btn--inactive");
+		} else {
+			hintsToggleBtn.innerHTML = "Show hint";	
+			hintsToggleBtn.classList.add("hints__toggle-btn");
+		}
 		congratsMsg.style.display = "none";
 		guessInterface.style.display = "block";
 		phraseDisplayContainer.style.display = "block";
 		incorrectLettersDisplay.innerHTML = "";
+		
 		countSpaces(curPhrase);
 		displayPhrase();
 
@@ -161,4 +178,17 @@ function HangmanController(gamesArray) {
 			incorrectLettersDisplay.appendChild(div);
 		}
 	}
+
+	function toggleHints() {
+
+	}
+
+	function cycleHints() {
+
+	}
 }
+
+// few things:
+
+// sorry, no hints available
+// 
