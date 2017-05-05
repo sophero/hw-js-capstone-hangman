@@ -3,8 +3,6 @@
 // Make it so that words don't split over multiple lines.
 // life counter,
 // guess phrase input
-// congratulations when you finish,
-// show incorrect letters below,
 // display hints
 // create new game using input string
 
@@ -22,7 +20,6 @@ var hangman = new HangmanController(gamesArray);
 function Game(phraseStr, hintArray) {
 	this.phrase = phraseStr.toUpperCase();
 	this.hints = hintArray;
-
 }
 
 function HangmanController(gamesArray) {
@@ -37,6 +34,7 @@ function HangmanController(gamesArray) {
 	var beginGameBtn = document.getElementsByClassName("begin-game-btn")[0];
 	var congratsMsg = document.getElementsByClassName("congratulations")[0];
 	var numSpacesMsg = document.getElementsByClassName("guess__num-spaces-msg")[0];
+	var incorrectLettersDisplay = document.getElementsByClassName("incorrect-letters__display")[0];
 
 	guessLetterInput.addEventListener("keyup", function(event) {
 		if (event.keyCode === 13) {
@@ -51,6 +49,7 @@ function HangmanController(gamesArray) {
 	var curGameIndex = 0;
 	var solvedIndices = [];
 	var spaceIndices = [];
+	var incorrectLetters = [];
 	var inGame = false;
 
 	function startRandGame() {
@@ -65,6 +64,7 @@ function HangmanController(gamesArray) {
 		curGameIndex = gameIndex;
 		solvedIndices = [];
 		spaceIndices = [];
+		incorrectLetters = [];
 		inGame = true;
 
 		var curGame = gamesArray[gameIndex];
@@ -116,14 +116,24 @@ function HangmanController(gamesArray) {
 	}
 
 	function checkLetter(letter) {
+		if (letter.length === 0) {
+			return;
+		}
 
+		var guess = letter.toUpperCase();
+		var match = false;
 		for (var k = 0; k < curPhrase.length; k++) {
-			if (letter.toUpperCase() === curPhrase[k]) {
+			if (guess === curPhrase[k]) {
 				solvedIndices.push(k);
+				match = true;
 			}
+		}
+		if (!match) {
+			incorrectLetters.push(guess);
 		}
 		displayPhrase();
 		checkSolvedIndices();
+		displayIncorrectLetters();
 	}
 
 	function checkSolvedIndices() {
@@ -139,5 +149,15 @@ function HangmanController(gamesArray) {
 		inGame = false;
 		congratsMsg.style.display = "block";
 		guessInterface.style.display = "none";
+	}
+
+	function displayIncorrectLetters() {
+		console.log(incorrectLetters);
+		incorrectLettersDisplay.innerHTML = "";
+		for (var k = 0; k < incorrectLetters.length; k++) {
+			let div = document.createElement("div");
+			div.innerHTML = incorrectLetters[k];
+			incorrectLettersDisplay.appendChild(div);
+		}
 	}
 }
