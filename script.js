@@ -213,12 +213,14 @@ function HangmanController(gamesArray) {
 		hintsCycleBtn.style.display = "block";
 		hintsToggleBtn.innerHTML = "Hide hints";
 		hintsDisplay.innerHTML = curHints[curHintIndex];
+		guessLetterInput.focus();
 	}
 
 	function hideHints() {
 		hintsDisplay.style.display = "none";
 		hintsCycleBtn.style.display = "none";
 		hintsToggleBtn.innerHTML = "Show hints";
+		guessLetterInput.focus();
 	}
 
 	function cycleHints() {
@@ -227,6 +229,7 @@ function HangmanController(gamesArray) {
 			curHintIndex = 0;
 		}
 		hintsDisplay.innerHTML = curHints[curHintIndex];
+		guessLetterInput.focus();
 	}
 
 }
