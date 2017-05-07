@@ -1,0 +1,49 @@
+
+.guess {
+	display: none;
+}
+
+.guess-letter__input {
+	font-size: 1.4em;
+	width: 50px;
+	padding: 5px 10px;
+	text-align: center;
+}
+
+.guess-phrase__input {
+	font-size: 1.2em;
+	width: 150px;
+	padding: 5px 10px;
+	text-align: center;	
+}
+
+.guess__num-words-msg {
+	text-align: center;
+}
+
+.guess__num-words {
+	font-weight: bold;
+}
+
+
+.guess-letter__submit-btn, .guess-phrase__submit-btn {
+	text-align: center;
+	font-size: 1em;
+	font-weight: bold;
+	// width: 120px;
+	// height: 40px;
+	background-color: lightgreen;
+	border: 2px solid lightgreen;
+	border-radius: 5px;
+	padding: 7px;
+	margin: 5px 10px;
+
+	&:hover {
+		cursor: pointer;
+	}	
+}
+
+.guess-letter__container, .guess-phrase__container {
+	margin: 10px;
+	text-align: center;
+}

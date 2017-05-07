@@ -1,0 +1,48 @@
+.incorrect {
+	display: none;
+}
+
+.incorrect-letters__container {
+	width: 300px;
+	margin: 0 auto;
+	border: 1px solid black;
+	padding: 10px 20px;
+}
+
+.incorrect-letters__display {
+	width: 200px;
+	padding: 5px 15px;
+	color: darkblue;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	font-size: 1em;
+	font-weight: bold;
+}
+
+.incorrect-letters__letter {
+	margin: 5px;
+}
+
+.incorrect-phrases__container {
+	width: 300px;
+	margin: 0 auto;
+	border: 1px solid black;
+	padding: 10px 20px;
+}
+
+.incorrect-phrases__display {
+	width: 200px;
+	padding: 5px 15px;
+	color: darkblue;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	font-size: 1em;
+	font-weight: bold;
+}
+
+.incorrect-phrases__phrase {
+	margin: 5px;
+	color: darkblue;
+}

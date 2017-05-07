@@ -1,4 +1,5 @@
 
+// sort css classes from utility elements to match block title.
 // welcome message
 // Make it so that words don't split over multiple lines.
 // life counter,
@@ -31,38 +32,7 @@ function Game(phraseStr, hintArray) {
 
 function HangmanController(gamesArray) {
 	this.startRandGame = startRandGame;
-
 	var gamesArray = gamesArray;
-
-	var phraseDisplayContainer = document.getElementsByClassName("phrase-display__container")[0];
-	var phraseDisplay = document.getElementsByClassName("phrase-display")[0];
-	var guessInterface = document.getElementsByClassName("guess")[0];
-	var guessLetterInput = document.getElementsByClassName("guess-letter__input")[0];
-	var guessLetterSubmitBtn = document.getElementsByClassName("guess-letter__submit-btn")[0];
-	var beginGameBtn = document.getElementsByClassName("begin-game-btn")[0];
-	var congratsMsg = document.getElementsByClassName("congratulations")[0];
-	var numSpacesMsg = document.getElementsByClassName("guess__num-spaces-msg")[0];
-	var incorrectLettersContainer = document.getElementsByClassName("incorrect-letters__container")[0];
-	var incorrectLettersDisplay = document.getElementsByClassName("incorrect-letters__display")[0];
-	var hintsToggleBtn = document.getElementsByClassName("hints__toggle-btn")[0];
-	var hintsCycleBtn = document.getElementsByClassName("hints__cycle-btn")[0];
-	var hintsContainer = document.getElementsByClassName("hints")[0];
-	var hintsDisplay = document.getElementsByClassName("hints__display")[0];
-
-	guessLetterSubmitBtn.addEventListener("click", function() {
-		checkLetter();
-		guessLetterInput.value = "";
-	});
-	guessLetterInput.addEventListener("keyup", function(event) {
-		if (event.keyCode === 13) {
-			checkLetter();
-			event.target.value = "";
-		}
-	});
-	beginGameBtn.addEventListener("click", startRandGame);
-	hintsToggleBtn.addEventListener("click", toggleHints);
-	hintsCycleBtn.addEventListener("click", cycleHints);
-
 	var curPhrase = "";
 	var curHints = [];
 	var curHintIndex = 0;
@@ -70,8 +40,52 @@ function HangmanController(gamesArray) {
 	var solvedIndices = [];
 	var spaceIndices = [];
 	var incorrectLetters = [];
-	var inGame = false;
+	var incorrectPhrases = [];
 	
+	var phraseDisplayContainer = document.getElementsByClassName("phrase-display__container")[0];
+	var phraseDisplay = document.getElementsByClassName("phrase-display")[0];
+	var beginGameBtn = document.getElementsByClassName("begin-game-btn")[0];
+	var congratsMsg = document.getElementsByClassName("congratulations")[0];
+	var numWordsMsg = document.getElementsByClassName("guess__num-words")[0];
+	var guessInterface = document.getElementsByClassName("guess")[0];
+	var guessLetterInput = document.getElementsByClassName("guess-letter__input")[0];
+	var guessLetterSubmitBtn = document.getElementsByClassName("guess-letter__submit-btn")[0];
+	var guessPhraseInput = document.getElementsByClassName("guess-phrase__input")[0];
+	var guessPhraseSubmitBtn = document.getElementsByClassName("guess-phrase__submit-btn")[0];
+	var incorrectDisplay = document.getElementsByClassName("incorrect")[0];
+	var incorrectLettersDisplay = document.getElementsByClassName("incorrect-letters__display")[0];	
+	var incorrectPhrasesDisplay = document.getElementsByClassName("incorrect-phrases__display")[0];
+	var hintsToggleBtn = document.getElementsByClassName("hints__toggle-btn")[0];
+	var hintsCycleBtn = document.getElementsByClassName("hints__cycle-btn")[0];
+	var hintsContainer = document.getElementsByClassName("hints")[0];
+	var hintsDisplay = document.getElementsByClassName("hints__display")[0];
+
+	beginGameBtn.addEventListener("click", startRandGame);
+	guessLetterSubmitBtn.addEventListener("click", function() {
+		checkLetter();
+		guessLetterInput.value = "";
+		guessLetterInput.focus();
+	});
+	guessLetterInput.addEventListener("keyup", function(event) {
+		if (event.keyCode === 13) {
+			checkLetter();
+			event.target.value = "";
+		}
+	});
+	guessPhraseSubmitBtn.addEventListener("click", function() {
+		checkPhrase();
+		guessPhraseInput.value = "";
+		guessPhraseInput.focus();
+	});
+	guessPhraseInput.addEventListener("keyup", function(event) {
+		if (event.keyCode === 13) {
+			checkPhrase();
+			event.target.value = "";
+		}
+	});
+	hintsToggleBtn.addEventListener("click", toggleHints);
+	hintsCycleBtn.addEventListener("click", cycleHints);
+
 
 	function startRandGame() {
 		do {
@@ -82,12 +96,11 @@ function HangmanController(gamesArray) {
 	}
 
 	function initializeGame(gameIndex) {
-		incorrectLettersContainer.style.display = "block";
 		curGameIndex = gameIndex;
 		solvedIndices = [];
 		spaceIndices = [];
 		incorrectLetters = [];
-		inGame = true;
+		incorrectPhrases = [];
 
 		var curGame = gamesArray[gameIndex];
 		curPhrase = curGame.phrase;
@@ -106,7 +119,12 @@ function HangmanController(gamesArray) {
 		hintsContainer.style.display = "block";
 		guessInterface.style.display = "block";
 		phraseDisplayContainer.style.display = "block";
+		incorrectDisplay.style.display = "block";
+
+		guessLetterInput.value = "";
+		guessPhraseInput.value = "";
 		incorrectLettersDisplay.innerHTML = "";
+		incorrectPhrasesDisplay.innerHTML = "";
 		
 		countSpaces(curPhrase);
 		displayPhrase();
@@ -121,19 +139,18 @@ function HangmanController(gamesArray) {
 			}
 		}
 		var numWords = 1 + spaceIndices.length;
-		var wordsMsg = "Phrase consists of " + numWords;
 		if (numWords === 1) {
-			wordsMsg += " word.";
+			numWords += " word";
 		} else {
-			wordsMsg += " words.";
+			numWords += " words";
 		}
-		numSpacesMsg.innerHTML = wordsMsg;
+		numWordsMsg.innerHTML = numWords;
 	}
 
 	function displayPhrase() {
 		phraseDisplay.innerHTML = "";
 		for (var k = 0; k < curPhrase.length; k++) {
-			var letterDiv = document.createElement("DIV");
+			var letterDiv = document.createElement("div");
 			
 			if (curPhrase[k] === " ") {
 				letterDiv.classList.add("phrase-display__space");
@@ -180,13 +197,6 @@ function HangmanController(gamesArray) {
 		solvedGame();
 	}
 
-	function solvedGame() {
-		inGame = false;
-		congratsMsg.style.display = "block";
-		guessInterface.style.display = "none";
-		hintsContainer.style.display = "none";
-	}
-
 	function displayIncorrectLetters() {
 		incorrectLettersDisplay.innerHTML = "";
 		for (var k = 0; k < incorrectLetters.length; k++) {
@@ -230,6 +240,42 @@ function HangmanController(gamesArray) {
 		}
 		hintsDisplay.innerHTML = curHints[curHintIndex];
 		guessLetterInput.focus();
+	}
+
+	function checkPhrase() {
+		var guess = guessPhraseInput.value.toUpperCase();
+
+		if (guess === curPhrase) {
+
+			for (var k = 0; k < curPhrase.length; k++) {
+				solvedIndices.push(k);
+			}
+			displayPhrase();
+			solvedGame();
+
+		} else {
+
+			if (incorrectPhrases.indexOf(guess) < 0) {
+				incorrectPhrases.push(guess);
+			}
+			displayIncorrectPhrases();
+		}
+	}
+
+	function displayIncorrectPhrases() {
+		incorrectPhrasesDisplay.innerHTML = "";
+		for (var k = 0; k < incorrectPhrases.length; k++) {
+			var div = document.createElement("div");
+			div.classList.add("incorrect-phrases__phrase");
+			div.innerHTML = incorrectPhrases[k];
+			incorrectPhrasesDisplay.appendChild(div);
+		}
+	}
+
+	function solvedGame() {
+		congratsMsg.style.display = "block";
+		guessInterface.style.display = "none";
+		hintsContainer.style.display = "none";
 	}
 
 }

@@ -66,11 +66,38 @@ body {
   padding: 5px 10px;
   text-align: center; }
 
-.guess__num-spaces-msg {
+.guess-phrase__input {
+  font-size: 1.2em;
+  width: 150px;
+  padding: 5px 10px;
   text-align: center; }
 
+.guess__num-words-msg {
+  text-align: center; }
+
+.guess__num-words {
+  font-weight: bold; }
+
+.guess-letter__submit-btn, .guess-phrase__submit-btn {
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: lightgreen;
+  border: 2px solid lightgreen;
+  border-radius: 5px;
+  padding: 7px;
+  margin: 5px 10px; }
+  .guess-letter__submit-btn:hover, .guess-phrase__submit-btn:hover {
+    cursor: pointer; }
+
+.guess-letter__container, .guess-phrase__container {
+  margin: 10px;
+  text-align: center; }
+
+.incorrect {
+  display: none; }
+
 .incorrect-letters__container {
-  display: none;
   width: 300px;
   margin: 0 auto;
   border: 1px solid black;
@@ -89,16 +116,25 @@ body {
 .incorrect-letters__letter {
   margin: 5px; }
 
-.guess-letter__submit-btn {
-  text-align: center;
+.incorrect-phrases__container {
+  width: 300px;
+  margin: 0 auto;
+  border: 1px solid black;
+  padding: 10px 20px; }
+
+.incorrect-phrases__display {
+  width: 200px;
+  padding: 5px 15px;
+  color: darkblue;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   font-size: 1em;
-  font-weight: bold;
-  background-color: lightgreen;
-  border: 2px solid lightgreen;
-  border-radius: 5px;
-  padding: 7px; }
-  .guess-letter__submit-btn:hover {
-    cursor: pointer; }
+  font-weight: bold; }
+
+.incorrect-phrases__phrase {
+  margin: 5px;
+  color: darkblue; }
 
 .hints {
   margin: 10px auto;
