@@ -127,6 +127,7 @@ body {
   width: 300px;
   margin: 0 auto;
   border: 1px solid black;
+  border-top: none;
   padding: 10px 20px; }
 
 .incorrect-phrases__display {
@@ -140,8 +141,7 @@ body {
   font-weight: bold; }
 
 .incorrect-phrases__phrase {
-  margin: 5px;
-  color: darkblue; }
+  margin: 5px; }
 
 .hints {
   margin: 10px auto;

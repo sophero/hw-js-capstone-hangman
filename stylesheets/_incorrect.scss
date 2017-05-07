@@ -28,6 +28,7 @@
 	width: 300px;
 	margin: 0 auto;
 	border: 1px solid black;
+	border-top: none;
 	padding: 10px 20px;
 }
 
@@ -44,5 +45,4 @@
 
 .incorrect-phrases__phrase {
 	margin: 5px;
-	color: darkblue;
 }
