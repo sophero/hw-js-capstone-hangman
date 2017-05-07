@@ -47,6 +47,7 @@ function HangmanController(gamesArray) {
 	var beginGameBtn = document.getElementsByClassName("begin-game-btn")[0];
 	var congratsMsg = document.getElementsByClassName("congratulations")[0];
 	var numWordsMsg = document.getElementsByClassName("guess__num-words")[0];
+	var noPunctuationMsg = document.getElementsByClassName("no-punctuation-msg")[0];
 	var guessInterface = document.getElementsByClassName("guess")[0];
 	var guessLetterInput = document.getElementsByClassName("guess-letter__input")[0];
 	var guessLetterSubmitBtn = document.getElementsByClassName("guess-letter__submit-btn")[0];
@@ -116,6 +117,7 @@ function HangmanController(gamesArray) {
 			hintsToggleBtn.classList.remove("hints__toggle-btn--inactive");
 		}
 		congratsMsg.style.display = "none";
+		noPunctuationMsg.style.display = "none";
 		hintsContainer.style.display = "block";
 		guessInterface.style.display = "block";
 		phraseDisplayContainer.style.display = "block";
@@ -169,7 +171,7 @@ function HangmanController(gamesArray) {
 	function checkLetter() {
 		var guess = guessLetterInput.value.toUpperCase();
 
-		if (guess.length === 0 || !/[A-Z]/.test(guess)) {
+		if (guess.length !== 1 || !/[A-Z]/.test(guess)) {
 			return;
 		}
 
@@ -243,10 +245,18 @@ function HangmanController(gamesArray) {
 	}
 
 	function checkPhrase() {
+		noPunctuationMsg.style.display = "none";
 		var guess = guessPhraseInput.value.toUpperCase();
 
-		if (guess === curPhrase) {
+		for (var k = 0; k < guess.length; k++) {
+			if (!/[A-Z\s]/.test(guess[k])) {
+				noPunctuationMsg.style.display = "block";
+				return;
+			}
+		}			
 
+
+		if (guess === curPhrase) {
 			for (var k = 0; k < curPhrase.length; k++) {
 				solvedIndices.push(k);
 			}
