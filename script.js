@@ -151,20 +151,29 @@ function HangmanController(gamesArray) {
 
 	function displayPhrase() {
 		phraseDisplay.innerHTML = "";
-		for (var k = 0; k < curPhrase.length; k++) {
-			var letterDiv = document.createElement("div");
-			
-			if (curPhrase[k] === " ") {
-				letterDiv.classList.add("phrase-display__space");
-			} else {
-				letterDiv.classList.add("phrase-display__letter");
-			}
+		var splitPhrase = curPhrase.split(" ");
 
-			if (solvedIndices.indexOf(k) > -1) {
-				letterDiv.innerHTML = curPhrase[k];
-				letterDiv.classList.add("phrase-display__letter--solved");
-			}
-			phraseDisplay.appendChild(letterDiv);
+		for (var j = 0; j < splitPhrase.length; j++) {
+			var wordDiv = document.createElement("div");
+			wordDiv.classList.add("phrase-display__word");
+
+			for (var k = 0; k < splitPhrase[j].length; k++) {
+				var letterDiv = document.createElement("div");				
+				letterDiv.classList.add("phrase-display__letter");
+
+				var letterIndex = 0;
+				for (var l = 0; l < j; l++) {
+					letterIndex += 1 + splitPhrase[l].length;
+				}
+				letterIndex += k;
+
+				if (solvedIndices.indexOf(letterIndex) > -1) {
+					letterDiv.innerHTML = splitPhrase[j][k];
+					letterDiv.classList.add("phrase-display__letter--solved");
+				}
+				wordDiv.appendChild(letterDiv);
+			}	
+			phraseDisplay.appendChild(wordDiv);
 		}
 	}
 
