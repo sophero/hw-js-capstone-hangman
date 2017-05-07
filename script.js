@@ -1,5 +1,5 @@
-// what messages need to be passed?
 
+// welcome message
 // Make it so that words don't split over multiple lines.
 // life counter,
 // guess phrase input
@@ -150,13 +150,12 @@ function HangmanController(gamesArray) {
 	}
 
 	function checkLetter() {
-		var letter = guessLetterInput.value;
+		var guess = guessLetterInput.value.toUpperCase();
 
-		if (letter.length === 0) {
+		if (guess.length === 0) {
 			return;
 		}
 
-		var guess = letter.toUpperCase();
 		var match = false;
 		for (var k = 0; k < curPhrase.length; k++) {
 			if (guess === curPhrase[k]) {
@@ -164,7 +163,7 @@ function HangmanController(gamesArray) {
 				match = true;
 			}
 		}
-		if (!match) {
+		if (!match && incorrectLetters.indexOf(guess) < 0) {
 			incorrectLetters.push(guess);
 		}
 		displayPhrase();
@@ -191,7 +190,8 @@ function HangmanController(gamesArray) {
 	function displayIncorrectLetters() {
 		incorrectLettersDisplay.innerHTML = "";
 		for (var k = 0; k < incorrectLetters.length; k++) {
-			let div = document.createElement("div");
+			var div = document.createElement("div");
+			div.classList.add("incorrect-letters__letter");
 			div.innerHTML = incorrectLetters[k];
 			incorrectLettersDisplay.appendChild(div);
 		}
