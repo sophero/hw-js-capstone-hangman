@@ -152,7 +152,7 @@ function HangmanController(gamesArray) {
 	function checkLetter() {
 		var guess = guessLetterInput.value.toUpperCase();
 
-		if (guess.length === 0) {
+		if (guess.length === 0 || !/[A-Z]/.test(guess)) {
 			return;
 		}
 
