@@ -1,11 +1,6 @@
-
-// sort css classes from utility elements to match block title.
 // welcome message
-// Make it so that words don't split over multiple lines.
 // life counter,
-// guess phrase input
 // create new game using input string
-// add some color, sizing, positioning.
 
 // extra: make it multiplayer
 // incorporate external word libraries using some api
