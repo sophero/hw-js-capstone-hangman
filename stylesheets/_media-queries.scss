@@ -1,0 +1,23 @@
+@media all and (max-width: 678px) {
+
+	.begin-game-btn {
+		width: 100%;
+	}
+
+	.phrase-display__container {
+		width: 98vw;
+	}
+
+	.phrase-display {
+		width: 100%;
+	}
+
+	.guess-letter__submit-btn {
+		width: 100%;
+	}
+
+	.hints__toggle-btn, .hints__cycle-btn, .hints__display {
+		max-width: 100%;
+	}
+	
+}
