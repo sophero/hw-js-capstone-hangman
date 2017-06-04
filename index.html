@@ -8,52 +8,57 @@
 </head>
 <body>
 
-	<div class="begin-game-btn">New game</div>
+	<div class="welcome-begin-btn">Begin.</div>
 
-	<div class="phrase-display__container">
-		<div class="phrase-display"></div>	
-	</div>
-	<div class="congratulations">Congratulations!</div>
+	<div class="main-container">
+
+		<div class="begin-game-btn">New game</div>
+
+		<div class="phrase-display__container">
+			<div class="phrase-display"></div>
+		</div>
+		<div class="congratulations">Congratulations!</div>
 
 
-	<div class="guess">
-		<div class="guess__num-words-msg">
-			Phrase consists of
-			<span class="guess__num-words"></span>.
+		<div class="guess">
+			<div class="guess__num-words-msg">
+				Phrase consists of
+				<span class="guess__num-words"></span>.
+			</div>
+
+			<div class="guess-letter__container">
+				<span class="guess-letter__msg">Guess a letter:</span>
+				<input class="guess-letter__input" maxlength="1"></input>
+				<span class="guess-letter__submit-btn">Guess!</span>
+			</div>
+
+			<div class="incorrect">
+				<div class="incorrect-letters__container">
+					Incorrect letters:
+					<div class="incorrect-letters__display"></div>
+				</div>
+
+				<div class="incorrect-phrases__container">
+					Incorrect phrases:
+					<div class="incorrect-phrases__display"></div>
+				</div>
+			</div>
+			<div class="no-punctuation-msg">Letters and spaces only!</div>
+
+			<div class="guess-phrase__container">
+				<span class="guess-phrase__msg">Guess the full phrase:</span>
+				<input class="guess-phrase__input"></input>
+				<span class="guess-phrase__submit-btn">Go for it!</span>
+			</div>
 		</div>
 
-		<div class="guess-letter__container">
-			<span class="guess-letter__msg">Guess a letter:</span>
-			<input class="guess-letter__input" maxlength="1"></input>
-			<span class="guess-letter__submit-btn">Guess!</span>
-		</div>		
-		
-		<div class="incorrect">				
-			<div class="incorrect-letters__container">
-				Incorrect letters:
-				<div class="incorrect-letters__display"></div>
-			</div>
-			
-			<div class="incorrect-phrases__container">
-				Incorrect phrases:
-				<div class="incorrect-phrases__display"></div>
-			</div>
+		<div class="hints">
+			<div class="hints__toggle-btn">Show hints</div>
+			<div class="hints__display"></div>
+			<div class="hints__cycle-btn">Another hint please</div>
 		</div>
-		<div class="no-punctuation-msg">Letters and spaces only!</div>
 
-		<div class="guess-phrase__container">
-			<span class="guess-phrase__msg">Guess the full phrase:</span>
-			<input class="guess-phrase__input"></input>
-			<span class="guess-phrase__submit-btn">Go for it!</span>
-		</div>		
 	</div>
-
-	<div class="hints">
-		<div class="hints__toggle-btn">Show hints</div>
-		<div class="hints__display"></div>
-		<div class="hints__cycle-btn">Another hint please</div>
-	</div>
-
 
 	<script type="text/javascript" src="script.js"></script>
 </body>
