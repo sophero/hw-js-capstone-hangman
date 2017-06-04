@@ -1,17 +1,8 @@
-// welcome message
-// life counter,
-// create new game using input string
-
-// extra: make it multiplayer
-// incorporate external word libraries using some api
-// add hangman image sequence
-
-
 var phrase1 = new Game("rhythm", ["think music", "some people have it"]);
 var phrase2 = new Game("borborygmus", ["digestion related", "somewhat onomatopoeic"]);
 var phrase3 = new Game("system of a down", ["band from Glendale, CA", "all members are of armenian descent"]);
 var phrase4 = new Game("meteorologist");
-var gamesArray = [phrase1, phrase2, phrase3, phrase4]; 
+var gamesArray = [phrase1, phrase2, phrase3, phrase4];
 
 var hangman = new HangmanController(gamesArray);
 
@@ -36,9 +27,11 @@ function HangmanController(gamesArray) {
 	var spaceIndices = [];
 	var incorrectLetters = [];
 	var incorrectPhrases = [];
-	
+
+	var mainContainer = document.getElementsByClassName('main-container')[0];
 	var phraseDisplayContainer = document.getElementsByClassName("phrase-display__container")[0];
 	var phraseDisplay = document.getElementsByClassName("phrase-display")[0];
+	var welcomeBeginBtn = document.getElementsByClassName('welcome-begin-btn')[0];
 	var beginGameBtn = document.getElementsByClassName("begin-game-btn")[0];
 	var congratsMsg = document.getElementsByClassName("congratulations")[0];
 	var numWordsMsg = document.getElementsByClassName("guess__num-words")[0];
@@ -49,13 +42,19 @@ function HangmanController(gamesArray) {
 	var guessPhraseInput = document.getElementsByClassName("guess-phrase__input")[0];
 	var guessPhraseSubmitBtn = document.getElementsByClassName("guess-phrase__submit-btn")[0];
 	var incorrectDisplay = document.getElementsByClassName("incorrect")[0];
-	var incorrectLettersDisplay = document.getElementsByClassName("incorrect-letters__display")[0];	
+	var incorrectLettersDisplay = document.getElementsByClassName("incorrect-letters__display")[0];
 	var incorrectPhrasesDisplay = document.getElementsByClassName("incorrect-phrases__display")[0];
 	var hintsToggleBtn = document.getElementsByClassName("hints__toggle-btn")[0];
 	var hintsCycleBtn = document.getElementsByClassName("hints__cycle-btn")[0];
 	var hintsContainer = document.getElementsByClassName("hints")[0];
 	var hintsDisplay = document.getElementsByClassName("hints__display")[0];
 
+	welcomeBeginBtn.addEventListener("click", function() {
+		welcomeBeginBtn.style.display = "none";
+		mainContainer.style.display = "block";
+		beginGameBtn.style.display = "block";
+		startRandGame();
+	});
 	beginGameBtn.addEventListener("click", startRandGame);
 	guessLetterSubmitBtn.addEventListener("click", function() {
 		checkLetter();
@@ -85,8 +84,8 @@ function HangmanController(gamesArray) {
 
 	function startRandGame() {
 		do {
-			var randInt = Math.floor(Math.random() * gamesArray.length);		
-		} 
+			var randInt = Math.floor(Math.random() * gamesArray.length);
+		}
 		while (randInt === curGameIndex);
 		initializeGame(randInt);
 	}
@@ -105,10 +104,10 @@ function HangmanController(gamesArray) {
 
 		hideHints();
 		if (curHints.length === 0) {
-			hintsToggleBtn.innerHTML = "Sorry, no hints available."	
+			hintsToggleBtn.innerHTML = "Sorry, no hints available."
 			hintsToggleBtn.classList.add("hints__toggle-btn--inactive");
 		} else {
-			hintsToggleBtn.innerHTML = "Show hints";	
+			hintsToggleBtn.innerHTML = "Show hints";
 			hintsToggleBtn.classList.remove("hints__toggle-btn--inactive");
 		}
 		congratsMsg.style.display = "none";
@@ -122,7 +121,7 @@ function HangmanController(gamesArray) {
 		guessPhraseInput.value = "";
 		incorrectLettersDisplay.innerHTML = "";
 		incorrectPhrasesDisplay.innerHTML = "";
-		
+
 		countSpaces(curPhrase);
 		displayPhrase();
 
@@ -153,7 +152,7 @@ function HangmanController(gamesArray) {
 			wordDiv.classList.add("phrase-display__word");
 
 			for (var k = 0; k < splitPhrase[j].length; k++) {
-				var letterDiv = document.createElement("div");				
+				var letterDiv = document.createElement("div");
 				letterDiv.classList.add("phrase-display__letter");
 
 				var letterIndex = 0;
@@ -167,7 +166,7 @@ function HangmanController(gamesArray) {
 					letterDiv.classList.add("phrase-display__letter--solved");
 				}
 				wordDiv.appendChild(letterDiv);
-			}	
+			}
 			phraseDisplay.appendChild(wordDiv);
 		}
 	}
@@ -220,7 +219,7 @@ function HangmanController(gamesArray) {
 		if (hintsDisplay.style.display === "block") {
 			hideHints();
 		} else {
-			showHints();	
+			showHints();
 		}
 	}
 
@@ -257,7 +256,7 @@ function HangmanController(gamesArray) {
 				noPunctuationMsg.style.display = "block";
 				return;
 			}
-		}			
+		}
 
 
 		if (guess === curPhrase) {
